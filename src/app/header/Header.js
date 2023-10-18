@@ -29,14 +29,12 @@ const Header = () => {
 
         <div className={styles.bottomSection}>
           <div className={styles.bottomDiv1}>
-            <p className={styles.bottomP1}>Sell something people want</p>
+            <p className={styles.bottomP1}>Want A Ferry Ride!!!</p>
             <p className={styles.bottomP2}>
-              Instadukan helps Independent creators and trusted brands to create
-              their own online store, get more sales and assists with business
-              development in the modern marketplace
+            InstaDukan-E: Your one-stop platform for quick and hassle-free ferry bookings, making island-hopping a breeze.
             </p>
             <Button className="bg-blue-600" type="primary">
-              START SELLING
+              START BOOKING
             </Button>
           </div>
           <img

@@ -1,20 +1,64 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Card, Button } from "antd";
+import {
+  Card,
+  Button,
+  Modal,
+  Checkbox,
+  Form,
+  Input,
+  DatePicker,
+  Space,
+  Select,
+} from "antd";
 import { useObserver } from "mobx-react-lite";
 import CartStore from "./store/cartStore";
 import Link from "next/link";
 import Header from "./header/Header";
-
-
+import Footer from "./footer/Footer";
+import { COUNTRY_LIST } from "./utils/constants";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Add a flag to track if the modal has been opened
+  const [modalOpened, setModalOpened] = useState(false);
+
+  const [selectedDateRange, setSelectedDateRange] = useState(null);
+
+  // const showModal = () => {
+  //   setIsModalOpen(true);
+  // };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+    // console.log(values);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const onFinish = (values) => {
+    console.log(values);
+    CartStore.userInitialInfo(values);
+
+    if (selectedDateRange) {
+      console.log("Selected Date Range: ", selectedDateRange);
+    }
+
+    //Call login API
+  };
+
+  const { RangePicker } = DatePicker;
 
   useEffect(() => {
     async function fetchProducts() {
-      const temp = await fetch("https://haiderrafi.github.io/instadukan_ferry/instadukan_ferry.json");
+      const temp = await fetch(
+        "https://haiderrafi.github.io/instadukan_ferry/instadukan_ferry.json"
+      );
       const data = await temp.json();
       setProducts(data);
       // console.log(data);
@@ -22,11 +66,10 @@ export default function Home() {
     fetchProducts();
   }, []);
 
-
   return useObserver(() => (
     <>
-    <Header/>
-    <main>
+      <Header />
+      <main>
         <div>
           <div className="flex items-center justify-evenly pt-10 pb-10 font-bold text-lg">
             <p>Island Paradise</p>
@@ -46,6 +89,11 @@ export default function Home() {
                     <p>Price: {product?.price}</p>
                     <Button
                       onClick={() => {
+                        // setIsModalOpen(true);
+                        if (!modalOpened) {
+                          // setModalOpened(true);
+                          setIsModalOpen(true);
+                        }
                         CartStore.addToCart(product);
                       }}
                       className="bg-green-600"
@@ -56,10 +104,102 @@ export default function Home() {
                   </Card>
                 ))}
             </div>
-            
+
+            {CartStore.travelInfo.length === 0 && (
+              <Modal
+                title="Passengers Information"
+                open={isModalOpen}
+                onOk={handleOk}
+                onCancel={handleCancel}
+              >
+                <Form
+                  layout="vertical"
+                  name="basic"
+                  labelCol={{
+                    span: 24,
+                  }}
+                  wrapperCol={{
+                    span: 24,
+                  }}
+                  onFinish={onFinish}
+                  autoComplete="off"
+                >
+                  {/* input for userName */}
+                  <Form.Item label="Username" name="username">
+                    <Input />
+                  </Form.Item>
+
+                  {/* input for email */}
+                  <Form.Item
+                    label="Email"
+                    name="email"
+                    rules={[
+                      {
+                        type: "email",
+                        message: "Please enter a valid email address",
+                      },
+                    ]}
+                  >
+                    <Input />
+                  </Form.Item>
+
+                  {/* input for age  */}
+                  <Form.Item label="Age" name="age">
+                    <Input type="number" />
+                  </Form.Item>
+
+                  {/* input for number of pasangers */}
+                  <Form.Item label="Passenger" name="passenger">
+                    <Input type="number" />
+                  </Form.Item>
+
+                  {/* input for data range */}
+                  <Form.Item label="Password" name="date">
+                    <DatePicker.RangePicker />
+                  </Form.Item>
+
+                  {/* input for gender */}
+                  <Form.Item label="Gender" name="gender">
+                    <Select>
+                      <Select.Option value="male">Male</Select.Option>
+
+                      <Select.Option value="female">Female</Select.Option>
+
+                      <Select.Option value="other">Others</Select.Option>
+                    </Select>
+                  </Form.Item>
+
+                    {/* country list */}
+                  <Form.Item label="Country" name="countries">
+                    <Select>
+                      {
+                        COUNTRY_LIST.map((data,index)=>{
+                          return <Select.Option key={index} value={data}>{data}</Select.Option>
+                        })
+                      }
+                      
+
+                    </Select>
+                  </Form.Item>
+
+                  {/* submit button */}
+                  <Form.Item>
+                    <Button
+                      onClick={handleOk}
+                      className="bg-blue-700"
+                      type="primary"
+                      htmlType="submit"
+                    >
+                      Submit
+                    </Button>
+                  </Form.Item>
+                </Form>
+              </Modal>
+            )}
           </div>
         </div>
       </main>
+      <Footer />
     </>
-  ))
+  ));
 }

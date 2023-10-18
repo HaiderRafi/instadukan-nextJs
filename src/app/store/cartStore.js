@@ -4,6 +4,8 @@ import { useObserver } from "mobx-react-lite";
 
 class CartStore {
 	items = []; // An array to store the products added to the cart.
+    travelInfo=[];  //for initial information
+    
 
 	constructor() {
 		makeAutoObservable(this);
@@ -14,8 +16,19 @@ class CartStore {
 		this.items.push(product);
 	}
 
+    //for clearing the cart
     clearCart(){
         this.items=[];
+    }
+
+    //for initial info through modal
+    userInitialInfo(values){
+        this.travelInfo=[values];
+    }
+
+    //for clearing initial info
+    clearInfo(){
+        this.travelInfo=[];
     }
 }
 

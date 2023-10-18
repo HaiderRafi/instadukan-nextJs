@@ -3,50 +3,90 @@
 import { useObserver } from "mobx-react-lite";
 import React from "react";
 import CartStore from "../store/cartStore";
-import { Modal, Form, Input, Button } from "antd";
+import { Button } from "antd";
+import Footer from "../footer/Footer";
+import EmptyCart from "../emptyCart/EmptyCart";
 
 export default function Cart() {
-  const showModal = () => {
-    // Implement your modal logic here
-  };
+  console.log(CartStore.travelInfo);
 
-  const onFinish = (values) => {
-    // Handle passenger information and checkout here
-  };
+  const total = CartStore.items.reduce((acc, item) => acc + item.price, 0);
 
-//   console.log(CartStore.items);
+  //empty cart
+  // if(CartStore.items.length===0){
+  //   return <EmptyCart/>
+  // }
 
   return useObserver(() => (
     <>
-      <h1>Shopping Cart</h1>
-      {CartStore.items.map((item) => (
-        <div key={item.id}>
-          <h3>{item.name}</h3>
-          <p>Price: ${item.price}</p>
+      <div className="flex justify-center items-center h-36  bg-gradient-to-r from-yellow-100 via-yellow-300 to-yellow-500">
+        <div>
+          <h1 className="text-4xl font-bold">Your Travel Cart ⛵</h1>
         </div>
-      ))}
+      </div>
 
-      <Button onClick={showModal}>Checkout</Button>
-      <Button onClick={() => CartStore.clearCart()}>Clear Cart</Button>
-      {/* <Button onClick={() => CartStore.clearCart()}>Clear Cart</Button> */}
-      <Modal
-        title="Passenger Information"
-        visible={false}
-        onOk={onFinish}
-        onCancel={showModal}
-      >
-        <Form name="passenger_info" onFinish={onFinish}>
-          <Form.Item name="name" label="Name">
-            <Input type="text" />
-          </Form.Item>
-          <Form.Item name="email" label="Email">
-            <Input />
-          </Form.Item>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form>
-      </Modal>
+      <div className=" flex flex-col w-full h-full">
+        <div className="flex justify-evenly pt-5">
+          <button
+            onClick={() => window.history.back()}
+            className=" p-2 m-4 font-bold border border-orange-500 hover:shadow-lg hover:border-orange-600"
+          >
+            BACK
+          </button>
+          <button
+            className="p-2 m-4 bg-gray-800 text-white"
+            onClick={() => {
+              CartStore.clearCart();
+              CartStore.clearInfo();
+            }}
+          >
+            Clear Cart
+          </button>
+        </div>
+        <div className="flex flex-col justify-center items-center pb-6">
+          <div className=" flex flex-col border border-dotted shadow-lg  w-[50%] h-[100%]">
+            <h1 className="font-semibold text-3xl p-2 m-2 ">Total Items</h1>
+            {CartStore.items.map((data) => {
+              return (
+                <>
+                  <h1 className="font-medium text-base pl-2  ">
+                    &#9658;{data.name}:- RS {data.price}
+                  </h1>
+                </>
+              );
+            })}
+            <hr></hr>
+
+            <h1 className="font-semibold text-3xl p-2 m-2">Bill Details</h1>
+            <div className="flex justify-around">
+              <div>
+                <h1 className="text-sm">Name</h1>
+                <h1 className="text-sm">Email Address</h1>
+                <h1 className="text-sm">Age</h1>
+                <h1 className="text-sm">Gender</h1>
+                <h1 className="text-sm">No of Passengers</h1>
+                <hr></hr>
+                <h1 className="font-semibold">TO PAY</h1>
+              </div>
+              <div>
+                {CartStore.travelInfo.map((data) => {
+                  return (
+                    <>
+                      <h1 className="text-sm">{data.username}</h1>
+                      <h1 className="text-sm">{data.email}</h1>
+                      <h1 className="text-sm">{data.age}</h1>
+                      <h1 className="text-sm">{data.gender}</h1>
+                      <h1 className="text-sm">{data.passenger}</h1>
+                      <h1 className="text-sm">{total * data.passenger}</h1>
+                    </>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Footer/>
     </>
   ));
 }
