@@ -1,5 +1,8 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+### `Live Link`
+https://instaferry.netlify.app/
+
 ### `Installation`
 * Clone the repository to your local machine.
 * Run npm install to install the project dependencies.
