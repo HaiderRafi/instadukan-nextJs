@@ -1,0 +1,35 @@
+.mainDiv {
+  width: 100%;
+  background-color: #000000;
+  height: 550px;
+}
+
+.mainDiv1 {
+  display: flex;
+  padding-top: 5rem;
+  justify-content: space-evenly;
+}
+
+.mainDiv2 {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  color: #9ca3af;
+}
+
+.liFirst {
+  padding-top: 1.25rem;
+  color: #ffffff;
+}
+
+.liAll {
+  padding-top: 0.25rem;
+  color: #ffffff;
+}
+
+.secondDiv {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  color: #9ca3af;
+}

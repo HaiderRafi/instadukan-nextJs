@@ -1,5 +1,11 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+### `Installation`
+* Clone the repository to your local machine.
+* Run npm install to install the project dependencies.
+* Run npm start to start the development server.
+* Open your web browser and navigate to http://localhost:3000.
+
 ## Getting Started
 
 First, run the development server:
@@ -14,23 +20,28 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## About 
+Welcome to the Ferry Booking App Repository! This application allows users to book ferry rides to the beautiful Andaman and Nicobar Islands. Users can select their travel dates and provide passenger information for a seamless booking experience. Enjoy exploring and customizing your ferry journey with this easy-to-use app!
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### `Technologies Used`
+* Nextjs: React framework that gives you building blocks to create web application
+* Tailwind CSS: A utility-first CSS framework for rapid UI development.
+* Ant Design: For readyMade Components
+* Mobx: For state managemet
 
-## Learn More
+### `Contributing`
+Contributions are welcome! If you'd like to enhance this project, please follow these steps:
 
-To learn more about Next.js, take a look at the following resources:
+* Fork the repository.
+* Create a new branch for your feature: git checkout -b feature-name.
+* Commit your changes: git commit -m 'Add some feature'.
+* Push to the branch: git push origin feature-name.
+* Open a pull request.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### `Contact`
+For any inquiries or questions, please contact your :- haiderrafi.7@gmail.com
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Feel free to enhance this README template with additional sections such as installation steps, deployment instructions, screenshots, and more. Make sure to tailor the information to accurately reflect your application and its feature
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### `Cheers!!!!`

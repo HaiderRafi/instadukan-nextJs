@@ -5,7 +5,6 @@ import {
   Card,
   Button,
   Modal,
-  Checkbox,
   Form,
   Input,
   DatePicker,
@@ -14,7 +13,6 @@ import {
 } from "antd";
 import { useObserver } from "mobx-react-lite";
 import CartStore from "./store/cartStore";
-import Link from "next/link";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import { COUNTRY_LIST } from "./utils/constants";
@@ -26,7 +24,7 @@ export default function Home() {
   // Add a flag to track if the modal has been opened
   const [modalOpened, setModalOpened] = useState(false);
 
-  const [selectedDateRange, setSelectedDateRange] = useState(null);
+  // const [selectedDateRange, setSelectedDateRange] = useState(null);
 
   // const showModal = () => {
   //   setIsModalOpen(true);
@@ -43,17 +41,10 @@ export default function Home() {
 
   const onFinish = (values) => {
     console.log(values);
-    CartStore.userInitialInfo(values);
-
-    if (selectedDateRange) {
-      console.log("Selected Date Range: ", selectedDateRange);
-    }
-
-    //Call login API
+    CartStore.userInitialInfo(values); //sending data to cart
   };
 
-  const { RangePicker } = DatePicker;
-
+  //initilizing and calling api function to fetch data
   useEffect(() => {
     async function fetchProducts() {
       const temp = await fetch(
@@ -66,6 +57,11 @@ export default function Home() {
     fetchProducts();
   }, []);
 
+  // if(products.length===0){
+  //   return <h1>Loading...</h1>
+  // }
+
+  //using useObserver to keep track
   return useObserver(() => (
     <>
       <Header />
@@ -81,8 +77,8 @@ export default function Home() {
           <div className="flex justify-center">
             <div className="w-[50%] flex flex-wrap justify-around p-2 m-2 ">
               {products &&
-                products.map((product) => (
-                  <Card className="m-2" style={{ width: 300 }}>
+                products.map((product,index) => (
+                  <Card key={index} className="m-2" style={{ width: 300 }}>
                     <img className="" src={product?.image} />
                     <p>{product?.name}</p>
                     <p>About:{product?.description}</p>
@@ -105,6 +101,7 @@ export default function Home() {
                 ))}
             </div>
 
+            {/* conditional rendering for modal */}
             {CartStore.travelInfo.length === 0 && (
               <Modal
                 title="Passengers Information"
@@ -169,16 +166,16 @@ export default function Home() {
                     </Select>
                   </Form.Item>
 
-                    {/* country list */}
+                  {/* country list */}
                   <Form.Item label="Country" name="countries">
                     <Select>
-                      {
-                        COUNTRY_LIST.map((data,index)=>{
-                          return <Select.Option key={index} value={data}>{data}</Select.Option>
-                        })
-                      }
-                      
-
+                      {COUNTRY_LIST.map((data, index) => {
+                        return (
+                          <Select.Option key={index} value={data}>
+                            {data}
+                          </Select.Option>
+                        );
+                      })}
                     </Select>
                   </Form.Item>
 

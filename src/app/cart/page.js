@@ -27,6 +27,7 @@ export default function Cart() {
 
       <div className=" flex flex-col w-full h-full">
         <div className="flex justify-evenly pt-5">
+          {/* back button */}
           <button
             onClick={() => window.history.back()}
             className=" p-2 m-4 font-bold border border-orange-500 hover:shadow-lg hover:border-orange-600"
@@ -86,7 +87,7 @@ export default function Cart() {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   ));
 }

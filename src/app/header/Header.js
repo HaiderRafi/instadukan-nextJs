@@ -1,6 +1,6 @@
 import { Button } from "antd";
 import React from "react";
-import styles from './header.module.css'
+import styles from "./header.module.css";
 import Link from "next/link";
 import { useObserver } from "mobx-react-lite";
 import CartStore from "../store/cartStore";
@@ -19,8 +19,12 @@ const Header = () => {
             <p className={styles.logoText}>INSTADUKAN-e</p>
           </div>
 
+          {/* CartStore.items.length for cart items showing on header */}
           <div className={styles.navLinks}>
-           <Link href={"/cart"}> <p className={styles.cartLink}>Cart {CartStore.items.length}</p></Link>
+            <Link href={"/cart"}>
+              {" "}
+              <p className={styles.cartLink}>Cart {CartStore.items.length}</p>
+            </Link>
             <Button className="bg-blue-600" type="primary">
               Login
             </Button>
@@ -31,9 +35,10 @@ const Header = () => {
           <div className={styles.bottomDiv1}>
             <p className={styles.bottomP1}>Want A Ferry Ride!!!</p>
             <p className={styles.bottomP2}>
-            InstaDukan-E: Your one-stop platform for quick and hassle-free ferry bookings, making island-hopping a breeze.
+              InstaDukan-E: Your one-stop platform for quick and hassle-free
+              ferry bookings, making island-hopping a breeze.
             </p>
-            <Button className="bg-blue-600" type="primary">
+            <Button className={styles.btn2} type="primary">
               START BOOKING
             </Button>
           </div>
@@ -45,17 +50,8 @@ const Header = () => {
           />
         </div>
       </div>
-      
     </header>
-    
-   ) );
+  ));
 };
 
 export default Header;
-
-
-/**
- * 
- * <h1 className={styles.container}>sadasdasdsadasd</h1>
-      <h1 className={styles.container5}>sadasdasdsadasd</h1>
- */
