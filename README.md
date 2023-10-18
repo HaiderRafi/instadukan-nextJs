@@ -3,6 +3,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ### `Live Link`
 https://instaferry.netlify.app/
 
+### `JSON file hosted on a public GitHub repo`
+https://haiderrafi.github.io/instadukan_ferry/instadukan_ferry.json
+
 ### `Installation`
 * Clone the repository to your local machine.
 * Run npm install to install the project dependencies.

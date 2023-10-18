@@ -24,12 +24,7 @@ export default function Home() {
   // Add a flag to track if the modal has been opened
   const [modalOpened, setModalOpened] = useState(false);
 
-  // const [selectedDateRange, setSelectedDateRange] = useState(null);
-
-  // const showModal = () => {
-  //   setIsModalOpen(true);
-  // };
-
+ //for handling modal
   const handleOk = () => {
     setIsModalOpen(false);
     // console.log(values);
@@ -56,6 +51,7 @@ export default function Home() {
     }
     fetchProducts();
   }, []);
+
 
   // if(products.length===0){
   //   return <h1>Loading...</h1>
@@ -166,7 +162,7 @@ export default function Home() {
                     </Select>
                   </Form.Item>
 
-                  {/* country list */}
+                  {/* country list and hardcoded county array in utils/constant folder */}
                   <Form.Item label="Country" name="countries">
                     <Select>
                       {COUNTRY_LIST.map((data, index) => {
